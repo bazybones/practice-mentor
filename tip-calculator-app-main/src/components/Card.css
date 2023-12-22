@@ -1,0 +1,130 @@
+.card__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5rem;
+}
+
+.card {
+    background-color: var(--White);
+    height: auto;
+    width: 70%;
+    border-radius: 15px;
+    box-shadow: 0px 5px 30px var(--GrayishCyan);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    /* Ensure no content overflows */
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form__container {
+    width: 100%;
+}
+
+.form_item:not(:first-child) {
+    margin-top: 1rem;
+}
+
+.grid-item {
+    padding: 1rem;
+}
+
+.grid-item:nth-child(even) {
+    padding: 1rem;
+    background-color: var(--VeryDarkCyan);
+    border-radius: 1rem;
+    color: white;
+}
+
+.error-message {
+    color: lightcoral;
+    float: right;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 5px 5px 5px 10px;
+    border-radius: 5px;
+}
+
+.input-container:focus {
+    border: 1px solid red;
+    padding: 5px 5px 5px 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    width: 20px;
+    font-size: 24px;
+    color: var(--LightGrayishCyan);
+}
+
+.icon-container svg {
+    margin-top: 10px;
+}
+
+.label {
+    color: var(--DarkGrayishCyan);
+}
+
+.input-field {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 24px;
+    text-align: end;
+    width: 100%;
+}
+
+.input-field:focus {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 24px;
+    text-align: end;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+@media (max-width: 767px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .card__container {
+        margin-top: 2rem;
+    }
+
+    .header__container {
+        margin-top: 2rem;
+    }
+
+    .error-message {
+        width: 100%;
+    }
+
+    .card {
+        border-radius: 20px;
+        padding: 1rem;
+        width: 100%;
+        /* Full width on mobile */
+    }
+}
