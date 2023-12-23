@@ -19,6 +19,7 @@ interface TipResults {
 export default function Card() {
   const [form] = Form.useForm();
   const [formData, setFormData] = useState<FormData>({});
+  const [selectedTip, setSelectedTip] = useState<number | null>(null);
   const [tipResults, setTipResults] = useState<TipResults>({
     tipAmountPerPerson: "0.00",
     totalAmountPerPerson: "0.00",
@@ -28,10 +29,10 @@ export default function Card() {
 
   const calculateTip = (
     bill: number,
-    tipPercentage: number | string,
+    tipPercentage: number,
     noOfPeople: number
   ): TipResults => {
-    const tipAmount = (bill * Number(tipPercentage)) / 100;
+    const tipAmount = (bill * tipPercentage) / 100;
     const totalAmount = bill + tipAmount;
     const tipAmountPerPerson = tipAmount / noOfPeople;
     const totalAmountPerPerson = totalAmount / noOfPeople;
@@ -56,17 +57,30 @@ export default function Card() {
 
     setTipResults(tipResults);
   };
+  const handleTipArrayClick = (selectedTip: number) => {
+    // Clear the custom input field
+    form.setFieldsValue({ customTip: undefined });
 
-  console.log(formData);
+    // If the selected tip is the same as the previously selected tip, clear the selected tip
+    setSelectedTip((prevSelectedTip) =>
+      prevSelectedTip === selectedTip ? null : selectedTip
+    );
 
+    // Set the selected tip to the form
+    form.setFieldsValue({ tip: selectedTip });
+    form.validateFields(["tip"]); // Trigger revalidation for the 'tip' field
+  };
   const handleReset = () => {
     form.resetFields(); // Reset form fields
     setFormData({}); // Clear form data
+    setSelectedTip(null); // Reset selected tip
     setTipResults({
       tipAmountPerPerson: "0.00",
       totalAmountPerPerson: "0.00",
     }); // Reset tip results
   };
+
+  console.log(formData);
 
   return (
     <div className="card__container">
@@ -123,8 +137,14 @@ export default function Card() {
                   >
                     <div className="container">
                       {tipArray.map((tip, i) => (
-                        <div className="column" key={i}>
-                          <p>{tip}</p>
+                        <div
+                          className={`column ${
+                            selectedTip === tip ? "selected-tip" : ""
+                          }`}
+                          key={i}
+                          onClick={() => handleTipArrayClick(tip)}
+                        >
+                          <p>{tip}%</p>
                         </div>
                       ))}
 
@@ -153,6 +173,7 @@ export default function Card() {
                     ]}
                   >
                     <InputNumber
+                      name="customTip"
                       min={1}
                       controls={false}
                       className="w-100"
@@ -181,7 +202,6 @@ export default function Card() {
               </div>
               <div className="right-column">
                 <h2 style={{ textAlign: "right" }}>
-                  {" "}
                   ${tipResults.tipAmountPerPerson}
                 </h2>
               </div>
@@ -193,7 +213,6 @@ export default function Card() {
               </div>
               <div className="right-column">
                 <h2 style={{ textAlign: "right" }}>
-                  {" "}
                   ${tipResults.totalAmountPerPerson}
                 </h2>
               </div>
