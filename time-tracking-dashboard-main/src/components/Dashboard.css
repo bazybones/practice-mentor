@@ -1,0 +1,64 @@
+.layout-container {
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    width: 100%;
+    padding: 5rem;
+
+    @media screen and (max-width: 768px) {
+        padding: 5rem 2rem;
+    }
+}
+
+.large-grid-container {
+    @media screen and (max-width: 768px) {
+        padding: 2rem 0rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        white-space: nowrap;
+    }
+
+}
+
+.profile-pic {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    margin-right: 2rem;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* Creates 4 equal-width columns */
+    gap: 16px;
+
+    @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.time-container {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    white-space: nowrap;
+    justify-content: space-between;
+    /* @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr;
+    } */
+
+}
+
+
+
+.grid-item {
+    padding: 2rem;
+
+
+}
+
+.large-item {
+    grid-row: span 2;
+    /* This item spans two rows */
+}
